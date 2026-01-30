@@ -15,7 +15,7 @@ class LinkedList:
         else:
             sh = self.head
             while sh is not None:
-                print(sh.data, "-->", end=" ")
+                print(sh.data, "->", end=" ")
                 sh = sh.ref
     
     def add_nodeAtBegin(self, data):

@@ -50,6 +50,12 @@ class LinkedList:
             new_node.ref = n.ref
             n.ref = new_node
 
+    def insert_empty(self,data):
+        if self.head is None:
+            new_node = Node(data)
+            self.head = new_node
+        else:
+            print("Linked List is not empty")
 
     
     def add_nodeAtEnd(self, data):
@@ -64,8 +70,10 @@ class LinkedList:
 
 
 ll1 = LinkedList()
-ll1.add_nodeAtEnd(10)
-ll1.add_nodeAtEnd(20)
-ll1.add_nodeBefore(5,10)
-ll1.add_nodeAfter(30, 10)
+# ll1.add_nodeAtEnd(10)
+# ll1.add_nodeAtEnd(20)
+# ll1.add_nodeBefore(5,10)
+# ll1.add_nodeAfter(30, 10)
+ll1.insert_empty(100)
+ll1.insert_empty(200)
 ll1.print_LL()
