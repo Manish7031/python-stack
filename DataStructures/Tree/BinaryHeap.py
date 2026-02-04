@@ -25,6 +25,9 @@ class BinaryHeap:
     def nlargest(self, n, iterable=heap, key=None):
         return f"{n} largest items : {heapq.nlargest(n,heap)}"
     
+    def popped_priority_queue(self):
+        return f"popped priority queue items : {[heapq.heappop(priority_queue) for _ in range(len(priority_queue))]}"
+    
 
 bh = BinaryHeap()
 bh.insert(10)
