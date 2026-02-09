@@ -20,6 +20,10 @@ class  Iter:
     def gen(n):
         for i in range(n):
             yield i
+        
+    def gen2(n):
+        for i in range(n):
+            yield i*2
 
 
 # for i in Iter.gen(10):
