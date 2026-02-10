@@ -46,6 +46,27 @@ class Graph:
             graph[index1][index2] = weight
             #graph[index2][index1] = weight
         
+    def delete_node(self, v):
+        if v not in nodes:
+            print("Node does not exist")
+        else:
+            index = nodes.index(v)
+            node_count = node_count - 1
+            nodes.remove(v)
+            graph.pop(index)
+            for i in graph:
+                i.pop(index)
+    
+    def delete_edges(self, v1, v2):
+        if v1 not in nodes:
+            print(v1, "Node does not exist")
+        elif v2 not in nodes:
+            print(v2, "Node does not exist")
+        else:
+            index1 = nodes.index(v1)
+            index2 = nodes.index(v2)
+            graph[index1][index2] = 0
+            graph[index2][index1] = 0
 
 print("before adding nodes")
 print(nodes)
@@ -60,4 +81,5 @@ g.weighted_edge("B", "C", 5)
 print("After adding nodes")
 print(nodes)
 print(graph)
+g.delete_edges("A", "C")
 g.print_graph()
