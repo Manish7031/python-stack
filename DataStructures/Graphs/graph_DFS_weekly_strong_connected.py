@@ -1,12 +1,15 @@
+## weekly and strongly connected components of a directed graph using DFS
 # depth first search traversal in graph DFS
 # weigted, unweighted , undirected grapgh
 
 graph = {}
+graph1 = {}
 
 def add_node(v):
     if v in graph:
         print("Node already exists in graph!")
     graph[v] = []
+    graph1[v] = []
 
 def add_edges(v1, v2):
     if v1 not in graph:
@@ -29,23 +32,9 @@ def DFS(node, visited, graph):
         for i in graph[node]:
             DFS(i, visited, graph)
 
-def DFSIterative(node, graph):
-    visited = set()
-    if node not in graph:
-        print(node, "Node does not exist in graph!")
-        return
-    stack = []
-    stack.append(node)
-    while stack:
-        current = stack.pop()
-        if current not in visited:
-            print(current)
-            visited.add(current)
-            for i in graph[current]:
-                stack.append(i)
-
 
 visited = set()
+revvisited = set()
 add_node("A")
 add_node("B")
 add_node("C")
@@ -55,20 +44,26 @@ add_node("F")
 add_node("G")
 add_edges("A", "B")
 add_edges("A", "C")
-add_edges("B", "C")
-#add_edges("B", "E")
+add_edges("A", "D")
+add_edges("D", "E")
+#add_edges("B", "C")
+add_edges("B", "E")
 #add_edges("A", "D")
 add_edges("C", "D")
+add_edges("C", "F")
 add_edges("E", "F")
 add_edges("E", "G") 
 
 print(graph)
 DFS("A", visited, graph)
-#DFSIterative("A", graph)
-# print(f"after delete : {graph}")
 for i in list(graph):
     if i not in visited:
-        print("********* travel graph is disconnected **********")
+        print("**** weekly connected graph ****")
+        ##DFS(i, visited, graph)  # visit all nodes in weekly connected graph
         break
 else:
-    print("*** graph is connected ***")
+    DFS("A", revvisited, graph1)
+    if visited == revvisited:
+        print("**** strongly connected graph ****")
+    print("**** weekly connected graph ****")
+
