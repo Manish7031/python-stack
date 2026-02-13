@@ -1,12 +1,16 @@
 # Breadth first search traversal in graph BFS
 # weigted, unweighted , undirected grapgh
+from collections import deque
 
 graph = {}
+graph1 = {} #for weekly connected graph
 
 def add_node(v):
     if v in graph:
         print("Node already exists in graph!")
-    graph[v] = []
+    else:
+        graph[v] = []
+        graph1[v] = []
 
 def add_edges(v1, v2):
     if v1 not in graph:
@@ -34,9 +38,35 @@ def BFS(node, graph, visited):
                     Queue.append(i)
                     visited.add(i)
 
+## shortest path between nodes
+def shortest_path(graph, node, target):
+    if node not in graph:
+        print(node, "Node does not exist in graph!")
+    elif target not in graph:
+        print(target, "Node does not exist in graph!")
+    else:
+        visited2 = {}
+        Queue = deque()
+        visited2[node] = None
+        Queue.append(node)
+        while Queue:
+            current = Queue.popleft()
+            if current == target:
+                path = []
+                while current:
+                    path.append(current)
+                    current = visited2[current]
+                return path[::-1]
+            for i in graph[current]:
+                if i not in visited2:
+                    visited2[i] = current
+                    Queue.append(i)
+
+
 
 
 visited = set()
+visited1 = set()
 add_node("A")
 add_node("B")
 add_node("C")
@@ -54,14 +84,18 @@ add_edges("E", "D")
 add_edges("D", "F") 
 
 print(graph)
+print("Shortest path between A and F is: ", shortest_path(graph, "A", "F"))
 print("**** BFS Traversal ***** ")
 BFS("A", graph, visited)
 
 ## check connected graph
 for i in list(graph):
     if i not in visited:
-        print("Graph is disconnected!")
+        print("Graph is weekly connected *****")
         break
 else:
-    print("Graph is connected!")
+    BFS("A", graph1, visited1)
+    if visited == visited1:
+        print("Graph is strongly connected!")
+    print("Graph is weekly connected!")
     
