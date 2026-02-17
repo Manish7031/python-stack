@@ -5,6 +5,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.mixture import GaussianMixture
+from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
@@ -34,11 +35,20 @@ X_test_scaled = scaler.transform(X_test)
 # model
 gmm = GaussianMixture(n_components=3, random_state=42)
 gmm.fit(X_train_scaled)
+
+# compare with K-means prediction
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X_train_scaled)
+
 # prediction
 train_clusters = gmm.predict(X_train_scaled)
 test_clusters = gmm.predict(X_test_scaled)
 
-print("\nTest Cluster Predictions:")
+kmeans_pred = kmeans.predict(X_test_scaled)
+print("K-Means Predictions (first 10):")
+print(kmeans_pred[:10])
+
+print("\nGMM Cluster Predictions (first 10) :")
 print(test_clusters[:10])
 
 # Cluster Probabilities
